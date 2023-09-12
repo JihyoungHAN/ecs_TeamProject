@@ -8,6 +8,11 @@ import cv2
 import numpy as np
 import math
 
+#setting the camera 
+webcam = cv2.VideoCapture(0)
+if not webcam.isOpened():
+    print("Could not open webcam")
+    exit()
 
 # In[2]:
 
@@ -26,12 +31,12 @@ colors = np.random.uniform(0, 255, size=(len(classes), 3))
 
 
 #bringing the image
-video_capture = cv2.VideoCapture('traffic_light_video.mp4')
+#video_capture = cv2.VideoCapture('traffic_light_video.mp4')
 #frame_interval =1000
 #frame_count = 0 
 
-while video_capture.isOpened():
-    ret, img = video_capture.read()
+while webcam.isOpened():
+    ret, img = webcam.read()
     if not ret: 
         break 
         
@@ -67,9 +72,8 @@ while video_capture.isOpened():
                 cv2.imwrite('traffic_light_trim.jpg', img_trim)
                 org_img = cv2.imread('traffic_light_trim.jpg')
                 org_img = cv2.resize(org_img, dsize = (200, 400))
-                break
+
                 
-    
     # changing the image color 
     img = cv2.imread("traffic_light_trim.jpg", 1)
     hsv_img = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -98,6 +102,7 @@ while video_capture.isOpened():
                 print("Stop due to the RedLight")
             if G - R > 10 and G - B > 10 and G > 100:
                 print("Detected GreenLight")
+    
 
     #if cv2.waitKey(frame_interval) & 0xFF == ord('q'):
         #break
