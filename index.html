@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ECS 170 Team 16 Project</title>
+    </head>
+    <body>
+        <h1>Traffic Light Color Detection</h1>
+        <form action="/uploadfile/" method="post" enctype="multipart/form-data">
+            <label for="file">Upload an image: </label>
+            <input type="file" name="file" accept=".jpg, .jpeg" required>
+            <br>
+            <button type="submit">Process</button>
+        </form>
+
+        {% if result %}
+        <h2>Processing Result:</h2>
+        <p>{{ result }}</p>
+        {% endif %}
+    </body>
+</html>
